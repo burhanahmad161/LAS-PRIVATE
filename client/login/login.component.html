@@ -1,0 +1,225 @@
+<app-header></app-header>
+
+<div class="d-flex align-items-center vh-100">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Section: Text Content -->
+      <div class="col-lg-6">
+        <h1 class="my-5 display-3 fw-bold ls-tight">
+          Join the excitement <br />
+          <span class="highlight">of live bidding</span>
+        </h1>
+        <p class="text-muted">
+          Welcome to LAS (Live-Auction-System), your go-to platform for live auctions. Participate in real-time bidding and secure the items you desire from the comfort of your home. Sign up or log in now to start bidding!
+        </p>
+      </div>
+
+      <!-- Right Section: Authentication Forms -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <ul class="nav nav-tabs" id="authTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a style="cursor: pointer;"
+                  class="nav-link"
+                  [class.active]="!isLoginMode"
+                  (click)="isLoginMode = false"
+                  >Sign Up</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a style="cursor: pointer;"
+                  class="nav-link"
+                  [class.active]="isLoginMode"
+                  (click)="onLoginClick()"
+                  >Log In</a
+                >
+              </li>
+            </ul>
+
+            <div class="tab-content mt-4" id="authTabsContent">
+              <!-- Signup Form -->
+              <div
+                *ngIf="!isLoginMode"
+                class="tab-pane show active"
+                role="tabpanel"
+              >
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          id="signupFirstName"
+                          class="form-control"
+                          ngModel
+                          name="firstName"
+                          required
+                        />
+                        <label class="form-label" for="signupFirstName"
+                          >First name</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          id="signupLastName"
+                          class="form-control"
+                          ngModel
+                          name="lastName"
+                          required
+                        />
+                        <label class="form-label" for="signupLastName"
+                          >Last name</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input
+                      type="email"
+                      id="signupEmail"
+                      class="form-control"
+                      ngModel
+                      name="email"
+                      required
+                    />
+                    <label class="form-label" for="signupEmail"
+                      >Email address</label
+                    >
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input
+                      type="password"
+                      id="signupPassword"
+                      class="form-control"
+                      ngModel
+                      name="password"
+                      required
+                    />
+                    <label class="form-label" for="signupPassword">Password</label>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign up
+                  </button>
+                </form>
+              </div>
+
+              <div
+                *ngIf="isLoginMode"
+                class="tab-pane show active"
+                role="tabpanel"
+              >
+                <form (submit)="onLogin()">
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      [(ngModel)]="email"
+                      name="email"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      [(ngModel)]="password"
+                      name="password"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Log in</button>
+                </form>
+              </div>
+              <!-- <div *ngIf="errorMessage" class="alert alert-danger">{{
+                errorMessage
+              }}</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+    
+
+<!-- <app-header />
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" [class.active]="!isLoginMode" (click)="isLoginMode = false">Sign Up</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" [class.active]="isLoginMode" (click)="isLoginMode = true">Log In</a>
+                </li>
+              </ul>
+    
+              <div class="tab-content mt-4" id="authTabsContent">
+                
+                <div *ngIf="!isLoginMode" class="tab-pane show active" role="tabpanel">
+                  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="signupFirstName" class="form-control" ngModel name="firstName" required />
+                          <label class="form-label" for="signupFirstName">First name</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="signupLastName" class="form-control" ngModel name="lastName" required />
+                          <label class="form-label" for="signupLastName">Last name</label>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <div class="form-outline mb-4">
+                      <input type="email" id="signupEmail" class="form-control" ngModel name="email" required />
+                      <label class="form-label" for="signupEmail">Email address</label>
+                    </div>
+    
+                    <div class="form-outline mb-4">
+                      <input type="password" id="signupPassword" class="form-control" ngModel name="password" required />
+                      <label class="form-label" for="signupPassword">Password</label>
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+                  </form>
+                </div>
+    
+                <div *ngIf="isLoginMode" class="tab-pane show active" role="tabpanel">
+                  <form (submit)="onLogin()">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" [(ngModel)]="email" name="email" required />
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" [(ngModel)]="password" name="password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer /> -->

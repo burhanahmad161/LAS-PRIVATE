@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<!-- contact.component.html -->
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+      <h1 class="display-4">Contact Us</h1>
+      <p class="lead">We’d love to hear from you! Reach out to us with any questions or comments.</p>
+    </div>
+  
+    <!-- Contact Form -->
+    <section class="mb-5">
+      <h2 class="text-center mb-4">Get in Touch</h2>
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <label for="name">Name</label>
+              <input type="text" id="name" class="form-control" required name="name">
+            </div>
+            <div class="form-group mb-3">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" required  name="email">
+            </div>
+            <div class="form-group mb-3">
+              <label for="message">Message</label>
+              <textarea id="message" class="form-control" rows="5" required name="message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Contact Details -->
+    <section class="text-center mb-5">
+      <h2 class="mb-4">Our Location</h2>
+      <div class="map-container mb-4">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.7988047511374!2d-122.40117768462172!3d37.7873177797588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808e2a85d5c5%3A0x8b0a20f56c6a420d!2s100+Market+St%2C+San+Francisco%2C+CA+94105!5e0!3m2!1sen!2sus!4v1637800899675!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <p class="text-muted">123 Auction Street, San Francisco, CA 94105</p>
+      <p class="text-muted">Phone: <a href="tel:+1234567890" class="text-primary">+123-456-7890</a></p>
+      <p class="text-muted">Email: <a href="mailto:support@liveauction.com" class="text-primary">support&#64;liveauction.com</a></p>
+    </section>
+  </div>
+  
+  <app-footer></app-footer>

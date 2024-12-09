@@ -1,0 +1,64 @@
+<app-header />
+
+<div class="bidding-page">
+  <!-- <h1 class="page-title">Bidding Page</h1> -->
+
+  <!-- Auction Details and Top Bids Section -->
+  <div class="bidding-container">
+    <!-- Auction Details (Left Side) -->
+    <div class="auction-details">
+      <h2><strong>Item Name : </strong>{{ auction.name }}</h2>
+      <p><strong>Item Description : </strong>{{ auction.description }}</p>
+      <p><strong>Starting Price:</strong> ${{ auction.startingPrice }}</p>
+      
+      <!-- Image Container -->
+      <div class="auction-image-container">
+        <img [src]="auction.productImage" alt="Product Image" class="auction-image" />
+      </div>
+      
+      <!-- Place Bid Section -->
+      <div class="place-bid mt-4">
+        <h3 class="text-center mb-3">Place Your Bid</h3>
+        <form (submit)="submitBid()">
+          <div class="mb-3">
+            <label for="bidAmount" class="form-label">Enter Bid Amount</label>
+            <input 
+              id="bidAmount" 
+              type="number" 
+              [(ngModel)]="newBidAmount" 
+              name="bidAmount" 
+              required 
+              class="form-control"
+              placeholder="Enter your bid amount"
+            />
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Place Bid</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+
+    <!-- Top Bids (Right Side) -->
+    <div class="top-bids">
+      <h3>Top 3 Bids</h3>
+      <table class="bids-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Bidder</th>
+            <th>Bid Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bid of topBids; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>Anonymous</td>
+            <td>{{ bid.amount | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

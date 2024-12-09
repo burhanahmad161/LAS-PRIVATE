@@ -1,0 +1,273 @@
+.my-bids-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.popup-content h3 {
+  margin-top: 0;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+/* Dropdown menu styles */
+.dropdown-menu {
+  position: absolute;
+  top: 40px; /* Adjust based on your header's height */
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  padding: 10px;
+  display: block; /* Keep it hidden initially */
+}
+
+.dropdown-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 8px 10px;
+}
+
+.dropdown-menu li p {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Add some hover effects */
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+.popup-content button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #0056b3;
+}
+
+
+header {
+  background-color: #ffffff;
+  color: black;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  flex: 1;
+}
+
+.nav-links a {
+  color: black;
+  text-decoration: none;
+  margin: 0 15px;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  text-decoration: none;
+  color: blue;
+  transition: .3s ease;
+}
+
+.right-menu {
+  display: flex;
+  align-items: center;
+}
+
+.right-menu a {
+  color: black;
+  text-decoration: none;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.right-menu a:hover {
+  color: blue;
+  transition: .3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+}
+
+/* Dropdown Menu for Hamburger */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  width: 100%;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 10px 0;
+  text-align: left;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.show {
+  display: flex;
+}
+
+/* Media Query for screens 768px and below */
+@media (max-width: 768px) {
+  .nav-links,
+  .right-menu {
+    display: none;
+  }
+
+  .hamburger-btn {
+    display: block;
+  }
+}
+
+/* Media Query for screens 480px and below */
+@media (max-width: 480px) {
+  .dropdown-menu {
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #ffffff;
+  }
+
+  .dropdown-menu a {
+    padding: 15px 0;
+  }
+}
+
+
+
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 50px; /* Adjust based on your header height */
+  right: 0;
+  width: 300px; /* Width of the modal */
+  height: auto;
+  max-height: 80vh; /* Ensure it doesn't overflow */
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+/* Modal Content Styling */
+.modal-content {
+  padding: 20px;
+}
+
+/* Modal Header */
+/* .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h5 {
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 10px 0;
+}
+
+.profile-image {
+  display: block;
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.profile-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.profile-link:hover {
+  text-decoration: underline;
+} */
+
+/* To make the profile image circular and responsive */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover; /* Ensures the image covers the whole circle */
+}
+
+/* Optional: Add some spacing between the image and the text */
+.modal-body p {
+  margin-top: 10px;
+}

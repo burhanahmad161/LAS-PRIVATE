@@ -1,0 +1,39 @@
+<!-- <app-sidebar></app-sidebar> -->
+
+<div class="admin-container">
+  <div class="sidebar">
+    <!-- Sidebar content -->
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="admin-panel">
+    <h2>Manage Auctions</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Starting Price</th>
+          <th>Description</th>
+          <th>Duration (hours)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let auction of auctions">
+          <td><img [src]="auction.imageUrl" alt="{{ auction.name }}" width="100"></td>
+          <td>{{ auction.name }}</td>
+          <td>{{ auction.startingPrice | currency }}</td>
+          <td>{{ auction.description }}</td>
+          <td>{{ auction.duration }}</td>
+          <td>
+            <button (click)="deleteAuction(auction._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="auctions.length === 0">No auctions found.</p>
+  </div>
+</div>

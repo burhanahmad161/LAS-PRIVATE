@@ -1,0 +1,36 @@
+/* Dashboard Page CSS */
+
+/* Sidebar styling */
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #343a40; /* Dark background for sidebar */
+    color: #fff;
+    overflow-y: auto;
+  }
+  
+  #sidebar h4 {
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  #sidebar .nav-link {
+    color: #fff;
+  }
+  
+  #sidebar .nav-link.active {
+    background-color: #495057; /* Darker background for active link */
+    border-radius: 5px;
+  }
+  
+  /* Main content styling */
+  main {
+    flex: 1;
+    margin-left: 250px; /* Ensure that content does not overlap the sidebar */
+  }
+  
+  

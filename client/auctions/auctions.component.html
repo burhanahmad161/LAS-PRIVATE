@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="auction-list">
+  <h2>Available Auctions</h2>
+
+  <!-- Dropdown for Category Selection -->
+  <div class="category-selector">
+    <label for="categoryDropdown">Select Category:</label>
+    <select id="categoryDropdown" (change)="onCategoryChange($event)">
+      <option value="all">All Categories</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Home & Garden">Home & Garden</option>
+      <option value="Others">Others</option>
+    </select>
+  </div>
+
+  <!-- Auctions List -->
+  <div *ngIf="filteredAuctions.length > 0; else noAuctions" class="auction-container">
+    <div *ngFor="let auction of filteredAuctions" class="auction-card">
+      <div class="auction-card-image">
+        <img [src]="auction.productImage" style="object-fit: contain;" alt="{{ auction.name }}" />
+      </div>
+      <div class="auction-card-body">
+        <h3 class="auction-title">{{ auction.name }}</h3>
+        <p class="auction-description">{{ auction.description }}</p>
+        <p><strong>Starting Price:</strong> ${{ auction.startingPrice }}</p>
+        <p><strong>Time Left:</strong> {{ auction.remainingTime }}</p>
+        <div class="button-container">
+          <button class="bid-now-button" (click)="navigateToBidding(auction._id)">Bid Now!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Auctions Message -->
+  <ng-template #noAuctions>
+    <p>No active auctions in this category.</p>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

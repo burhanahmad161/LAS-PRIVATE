@@ -1,0 +1,22 @@
+<app-sidebar></app-sidebar>
+
+<div class="container">
+    <h2>View Users</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Username</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.userid }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
