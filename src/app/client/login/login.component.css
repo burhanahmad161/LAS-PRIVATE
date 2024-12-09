@@ -1,0 +1,52 @@
+.vh-100 {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .highlight {
+    color: #0c056e;
+  }
+  
+  .text-muted {
+    color: hsl(217, 10%, 50.8%);
+  }
+  
+  .card {
+    border: none;
+    border-radius: 12px;
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  .nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .nav-link {
+    color: #6c757d;
+    border: none;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nav-link.active {
+    color: #0c056e;
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background: #0c056e;
+    border: none;
+  }
+  .btn {
+    cursor: pointer;
+  }

@@ -1,0 +1,57 @@
+/* Container styling */
+.container {
+    max-width: 90%;
+    margin: auto;
+    /* background-color: #f9f9f9; */
+  }
+  
+  /* Style for the form */
+  form {
+    /* background-color: #ffffff; */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input and textarea fields */
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+  }
+  
+  /* Image styling */
+  .seller-image {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Text Colors */
+  h2 {
+    font-weight: 600;
+  }
+  
+  .text-secondary {
+    color: #6c757d;
+  }
+  
+  .text-primary {
+    color: #007bff;
+  }
+  
+  /* Button styling */
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  

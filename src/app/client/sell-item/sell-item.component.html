@@ -1,0 +1,46 @@
+<app-header />
+
+<div class="container mt-5">
+  <h2 style="font-weight:200; color: indigo;" class="display-4 text-center">Auction Your Item</h2> <br>
+  <div class="row">
+    <div class="col-md-6 mt-5"> <!-- Column for the form -->
+      <form (ngSubmit)="onSubmit()" #sellItemForm="ngForm">
+        <div class="mb-3">
+          <label for="itemName" class="form-label">Item Name</label>
+          <input type="text" id="itemName" class="form-control" required [(ngModel)]="item.name" name="itemName">
+        </div>
+        <div class="mb-3">
+          <label for="itemDescription" class="form-label">Description</label>
+          <textarea id="itemDescription" class="form-control" required [(ngModel)]="item.description" name="itemDescription"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="itemImage" class="form-label">Upload Image</label>
+          <input type="file" id="itemImage" class="form-control" (change)="onFileChange($event)">
+        </div>
+        <div class="mb-3">
+          <label for="auctionCategory" class="form-label">Auction Category</label>
+          <select id="auctionCategory" class="form-control" [(ngModel)]="item.category" name="auctionCategory" required>
+            <option value="" disabled selected>Select a category</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>        
+        <div class="mb-3">
+          <label for="startingBid" class="form-label">Starting Bid ($)</label>
+          <input type="number" id="startingBid" class="form-control" required [(ngModel)]="item.startingBid" name="startingBid">
+        </div>
+        <div class="mb-3">
+          <label for="auctionEndTime" class="form-label">Auction End Time</label>
+          <input type="datetime-local" id="auctionEndTime" class="form-control" required [(ngModel)]="item.auctionEndTime" name="auctionEndTime">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!isLoggedIn">List Item</button>
+        <!-- <p *ngIf="!isLoggedIn">Please log in to post an auction.</p> -->
+
+      </form>
+    </div>
+    <div class="col-md-6 mt-0 text-center"> <!-- Column for the image -->
+      <img src="/assets/sellerImage.jpg" alt="Auction Item" class="img-fluid"> <!-- Replace with your image path -->
+    </div>
+  </div>
+</div>
+
+<app-footer />
