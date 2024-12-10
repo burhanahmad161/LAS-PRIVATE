@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sell-item',
@@ -23,7 +24,7 @@ export class SellItemComponent implements OnInit {
 
   categories: string[] = ['Electronics', 'Fashion', 'Home & Garden', 'Others']; // Auction categories
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.isLoggedIn = !!localStorage.getItem('token');
@@ -40,7 +41,7 @@ export class SellItemComponent implements OnInit {
     }
 
     if (!this.selectedFile) {
-      alert('Please upload an image.');
+      this.toastr.error('Please upload an image.', 'Image Required');
       return;
     }
 
@@ -49,30 +50,37 @@ export class SellItemComponent implements OnInit {
     const durationInHours = (auctionEndTime - currentTime) / (1000 * 60 * 60);
 
     if (durationInHours <= 0) {
-      alert('Please select an auction end time in the future.');
+      this.toastr.error('Please select end time in the future.', 'Failure');
       return;
     }
 
     if (!this.item.category) {
-      alert('Please select an auction category.');
+      this.toastr.error('Please select an auction category.', 'Category required');
       return;
     }
 
+    if(!this.item.name) {
+      this.toastr.error('Please enter auction name', 'Name required')
+    }
+
+    if(!this.item.description) {
+      this.toastr.error('Please enter a description.', 'Description required')
+    }
     const formData = new FormData();
     formData.append('name', this.item.name);
     formData.append('description', this.item.description);
     formData.append('startingPrice', this.item.startingBid);
     formData.append('duration', durationInHours.toString());
-    formData.append('category', this.item.category); // Append category to the form data
+    formData.append('category', this.item.category);
     formData.append('productImage', this.selectedFile);
 
     this.http.post(`${this.apiUrl}/request/add`, formData).subscribe(
       (response: any) => {
-        alert('Auction listed successfully!');
+        this.toastr.success('Auction listed successfully!', 'Success');
       },
       (error) => {
-        console.error('Error listing auction:', error);
-        alert('Error listing auction.');
+        this.toastr.error('Error listing auction:', 'Error');
+        // alert('Error listing auction.');
       }
     );
   }

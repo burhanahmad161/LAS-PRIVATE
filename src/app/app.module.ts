@@ -30,6 +30,17 @@ import { AuctionsListComponent } from './admin/auctions-list/auctions-list.compo
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 import { TestToastsComponent } from './client/test-toasts/test-toasts.component';  // Required for toastr
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderComponent } from './client/home/order/order.component';
+import { ConfirmOrderComponent } from './client/home/confirm-order/confirm-order.component';
+import { SuccessComponent } from './client/success/success.component';
+import { CancelComponent } from './client/cancel/cancel.component';
+import { PaymentComponent } from './client/payment/payment.component';
+import { _StripeFactoryService } from '../app/services/stripe.service'; // Adjust the path
+import { NgxStripeModule } from 'ngx-stripe';
+import { MessagesComponent } from './admin/messages/messages.component';
+import { FeedacksComponent } from './admin/feedacks/feedacks.component';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +67,14 @@ import { TestToastsComponent } from './client/test-toasts/test-toasts.component'
     SellItemComponent,
     AuctionRequestsComponent,
     AuctionsListComponent,
-    TestToastsComponent
+    TestToastsComponent,
+    OrderComponent,
+    ConfirmOrderComponent,
+    SuccessComponent,
+    CancelComponent,
+    PaymentComponent,
+    MessagesComponent,
+    FeedacksComponent
   ],
   imports: [
     MatDialogModule,
@@ -65,9 +83,12 @@ import { TestToastsComponent } from './client/test-toasts/test-toasts.component'
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,  // Import BrowserAnimationsModule for animations
-    ToastrModule.forRoot()  // Required for toastr
+    ToastrModule.forRoot(),  // Required for toastr
+    NgbModule,
+    NgxStripeModule.forRoot()
+
   ],
-  providers: [],
+  providers: [_StripeFactoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

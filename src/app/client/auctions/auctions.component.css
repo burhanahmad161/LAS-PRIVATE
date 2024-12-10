@@ -142,3 +142,47 @@
     width: 90%;
   }
 }
+
+
+/* Custom styles for the card */
+.custom-card {
+  max-width: 500px; /* Control the width of the card */
+  margin: 0 auto;  /* Center the card horizontally */
+  border-radius: 15px; /* Softly round the edges of the card */
+  padding: 25px; /* Add some padding inside the card */
+  background-color: #ffffff; /* White background for the card */
+}
+
+/* Custom styles for the select dropdown */
+.custom-select {
+  background-color: #f8f9fa; /* Light background color for the dropdown */
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 10px; /* Rounded edges for the dropdown */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for select dropdown */
+.custom-select:hover {
+  border-color: #007bff; /* Change border color on hover */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Add shadow on hover */
+}
+
+/* Focus effect for select dropdown */
+.custom-select:focus {
+  border-color: #007bff; /* Change border color on focus */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add focus shadow */
+  outline: none; /* Remove default outline */
+}
+
+/* Custom padding for the select dropdown */
+.custom-select {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Label styling */
+.form-label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #495057;
+}

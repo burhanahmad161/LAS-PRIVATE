@@ -5,7 +5,8 @@ const ClientUserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  notifications: { type: [String], default: [] }  // Array of strings
+  notifications: { type: [String], default: [] },
+  winningBid: { type: String, default: '' }
 });
 
 const ClientUser = mongoose.model('ClientUser', ClientUserSchema);

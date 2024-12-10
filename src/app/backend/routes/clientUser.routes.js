@@ -120,7 +120,7 @@ const getUserById = async (req, res) => {
   }
 };
 router.post('/client-users/notifications/add', async (req, res) => {
-  const { firstName, message } = req.body;
+  const { firstName, auctionName, message } = req.body;
 
   try {
     // Find the user by their first name
@@ -136,6 +136,7 @@ router.post('/client-users/notifications/add', async (req, res) => {
     }
     console.log(user.notifications);
     user.notifications.push(message);
+    user.winningBid = auctionName
     console.log(user.notifications);
     // Save the updated user document
     await user.save();
@@ -150,22 +151,50 @@ router.post('/client-users/notifications/add', async (req, res) => {
 
 // Example route setup
 router.get('/api/client-users/:userid', getUserById);
+// router.post('/signup', async (req, res) => {
+//     const { email, password, firstName, lastName, notifications,winningBid  } = req.body;
+
+//     try {
+//       const existingUser = await ClientUser.findOne({ email }); // Use ClientUser instead of User
+//       if (existingUser) return res.status(400).json({ message: 'User already exists' });
+
+//       const hashedPassword = await bcrypt.hash(password, 10);
+//       const newUser = new ClientUser({ email, password: hashedPassword, firstName, lastName, notifications, winningBid }); // Use ClientUser here
+//       await newUser.save();
+
+//       res.status(201).json({ message: 'User created successfully' });
+//     } catch (error) {
+//       res.status(500).json({ message: 'Server error' });
+//     }
+// });
+
 router.post('/signup', async (req, res) => {
-    const { email, password, firstName, lastName, notifications  } = req.body;
+  const { email, password, firstName, lastName, notifications, winningBid } = req.body;
 
-    try {
-      const existingUser = await ClientUser.findOne({ email }); // Use ClientUser instead of User
-      if (existingUser) return res.status(400).json({ message: 'User already exists' });
+  try {
+    const existingUser = await ClientUser.findOne({ email }); // Check if the user already exists
+    if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new ClientUser({ email, password: hashedPassword, firstName, lastName, notifications }); // Use ClientUser here
-      await newUser.save();
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+    const newUser = new ClientUser({
+      email,
+      password: hashedPassword,
+      firstName,
+      lastName,
+      notifications,
+      winningBid,
+    });
 
-      res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-    }
+    await newUser.save(); // Save the new user to the database
+
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (error) {
+    console.error("Error creating user:", error);  // Log the actual error message to the console
+    res.status(500).json({ message: 'Server error', error: error.message });  // Return the error message
+  }
 });
+
+
 router.patch('/client-users/:userId', async (req, res) => {
   const { _id } = req.params;
   const { notificationMessage } = req.body;

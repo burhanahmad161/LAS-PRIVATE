@@ -1,45 +1,36 @@
 <header>
   <div class="header-content">
     <img src="/assets/LAS logo.PNG" style="width: 80px;" alt="Logo">
-    
+
     <nav class="nav-links">
       <a routerLink="/home">Home</a>
       <a routerLink="/about">About</a>
       <a routerLink="/auctions">Auctions</a>
-      <a routerLink="/contact">Contact</a>
+      <!-- <a routerLink="/contact">Contact</a> -->
       <a routerLink="/sell-item">Auction Your Item</a>
     </nav>
-    
+
     <div class="right-menu">
-      <a href="#" *ngIf="isLoggedIn" (click)="openOrders()"><i class="fa-solid fa-user"></i>&nbsp;My orders</a>     
-      <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>     
-      <a (click)="openMyBidsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-gavel" style="cursor: pointer;"></i>&nbsp;My Bids</a>
-      <a (click)="openNotificationsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-bell" style="cursor: pointer;"></i>&nbsp;My Notifications</a>
-      <!-- <a (click)="logout()"> -->
-        <!-- <a href="#" *ngIf="isLoggedIn" (click)="toggleNotifications($event)">
-          <i class="fa-solid fa-bell"></i>&nbsp;Notifications
-        </a> -->
-  
-        <!-- Notifications Dropdown -->
-        <!-- <div *ngIf="notificationsVisible" class="dropdown-menu">
-          <ul>
-            <li *ngFor="let notification of user.notifications">
-              <p>{{ notification }}</p>
-            </li>
-          </ul>
-        </div> -->
-  
-        <div class="button-container m-2">
-          <!-- <button class="btn btn-info">Login</button> -->
-          <button class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-          <button class="btn btn-danger" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
-        </div>
+
+      <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
+      <a (click)="openMyBidsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-gavel"
+          style="cursor: pointer;"></i>&nbsp;My Bids</a>
+      <a (click)="openNotificationsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-bell"
+          style="cursor: pointer;"></i>&nbsp;My Notifications</a>
+      <a (click)="openOrdersPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-bell"
+          style="cursor: pointer;"></i>&nbsp;My Orders</a>
+
+      <div class="button-container m-2">
+        <!-- <button class="btn btn-info">Login</button> -->
+        <button class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+        <button class="btn btn-danger" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
+      </div>
       <!-- </a> -->
     </div>
-    
+
     <button id="hamburger-btn" class="hamburger-btn" (click)="toggleMenu()">&#9776;</button>
   </div>
-  
+
   <div [ngClass]="{'dropdown-menu': true, 'show': menuVisible}">
     <a routerLink="/home">Home</a>
     <a routerLink="/about">About</a>
@@ -48,26 +39,14 @@
     <a routerLink="/sell-item">Auction Your Item</a>
     <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
     <a routerLink="/reminders" *ngIf="isLoggedIn"><i class="fa-solid fa-bell"></i>&nbsp;Reminders</a>
-    <!-- <a (click)="logout()"> -->
-      <div class="button-container">
-        <!-- <button class="btn btn-info">Login</button> -->
-        <button class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-        <button class="btn btn-danger" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
-      </div>
-    <!-- </a> -->
+    <div class="button-container">
+      <button class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+      <button class="btn btn-danger" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
+    </div>
   </div>
 </header>
 
-
-
-
-
-
-
-
-
-
-
+<!-- MODEL FOR THE USER'S PROFILE -->
 
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -76,85 +55,78 @@
         <h5 class="modal-title" id="profileModalLabel" style="color: indigo;">My Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-center"> <!-- Added 'text-center' class to center-align contents -->
-        <!-- Image at the top -->
-        <img src="/assets/profile.png" alt="Profile Image" class="profile-img mb-3"> <!-- Added 'profile-img' class for custom styling -->
-
-        <!-- First name and last name on the same line -->
+      <div class="modal-body text-center">
+        <img src="/assets/profile.png" alt="Profile Image" class="profile-img mb-3">
         <div class="d-flex justify-content-center">
           <p class="me-5"><strong style="color: indigo;">First Name:</strong> {{ user.firstName }}</p>
           <p><strong style="color: indigo;">Last Name:</strong> {{ user.lastName }}</p>
         </div>
-        
-        
-
-        <!-- Email in a separate line -->
         <p><strong style="color: indigo;">Email:</strong> {{ user.email }}</p>
       </div>
-      <div class="modal-footer justify-content-center"> <!-- Center the footer content -->
+      <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- MODEL FOR SHOWING THE USERS BIDS -->
+
 <div class="my-bids-popup" *ngIf="showMyBidsPopup">
   <div class="popup-content">
     <h3>My Bids</h3>
     <ul>
+      <div *ngIf="userBids.length === 0">
+        <p class="text-center">No bids yet!</p>
+      </div>
       <div *ngFor="let bid of userBids">
-        <p><b>item name :</b>{{ bid.auctionName }}, <b>your bid :</b>{{ bid.bidAmount}}, <b>bid time :</b>{{ bid.bidTime }}
+        <p class="text-center"><b>Item Name:</b> {{ bid.auctionName }}, <b>Your Bid:</b> {{ bid.bidAmount }}, <b>Bid Time:</b> {{ bid.bidTime }}</p>
       </div>
     </ul>
     <button (click)="closeMyBidsPopup()">Close</button>
   </div>
 </div>
 
-
-<div class="my-bids-popup" *ngIf="showNotificationsPopup">
-  <div class="popup-content bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+<!-- MODAL FOR DISPLAYING THE USER'S NOTIFICATIONS -->
+<div class="my-notifications-popup" *ngIf="showNotificationsPopup">
+  <div class="popup-content bg-gray-50 p-6 rounded-lg shadow-lg max-w-md mx-auto">
     <h3 class="text-center text-red-800 text-2xl font-semibold mb-4">My Notifications</h3>
     <ul class="space-y-3">
-      <li *ngFor="let notification of user.notifications" class="p-2 bg-gray-100 rounded-md shadow-sm hover:bg-gray-200">
-        <p class="text-gray-800">{{ notification }}</p>
+      <li *ngFor="let notification of user.notifications" 
+          class="p-3 border border-gray-200 rounded-lg hover:bg-gray-100 transition">
+        <p class="text-gray-700">{{ notification }}</p>
       </li>
     </ul>
     <div class="text-center mt-4">
-      <button class="close-btn px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" (click)="closeNotificationsPopup()">Close</button>
+      <button class="close-btn px-5 py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition"
+        (click)="closeNotificationsPopup()">Close</button>
     </div>
   </div>
 </div>
 
+<!-- MY ORDERS POPUP -->
 
-<!-- <div class="my-orders-popup" *ngIf="openOrders">
-  <div class="popup-content bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-    <h3 class="text-center text-red-800 text-2xl font-semibold mb-4">My Orders</h3>
-    <ul class="space-y-3">
-      <li *ngFor="let bid of userBids" class="p-2 bg-gray-100 rounded-md shadow-sm hover:bg-gray-200">
-        <p class="text-gray-800">{{ bid.auctionName }}</p>
-      </li>
-    </ul>
-    <div class="text-center mt-4">
-      <button class="close-btn px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" (click)="closeOrderPopup()">Close</button>
+<div class="my-orders-popup" *ngIf="showOrdersPopup">
+  <div class="popup-content bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+    <h3 class="text-center text-indigo-700 text-2xl font-semibold mb-6">My Orders</h3>
+
+    <div class="flex justify-between items-center mb-6">
+      <!-- Winning Bid Text (takes up 60%) -->
+      <p class="text-gray-800 px-4 mt-4 text-sm font-medium flex-1">{{ user.winningBid || 'No winning bid yet' }}</p>
+
+      <!-- Place Order Button (takes up 40%) -->
+      <button class="place-order-btn px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 transition w-40"
+        [routerLink]="['/order-details']">
+        Place Order
+      </button>
     </div>
-  </div>
-</div> -->
 
-
-<a href="#" *ngIf="isLoggedIn" (click)="openOrders()">
-  <i class="fa-solid fa-user"></i>&nbsp;My orders
-</a>
-
-<div class="my-bids-popup" *ngIf="showOrdersPopup">
-  <div class="popup-content bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
-    <h3 class="text-center text-red-800 text-2xl font-semibold mb-4">My Orders</h3>
-    <ul class="space-y-3">
-      <li *ngFor="let order of userx.orders" class="p-2 bg-gray-100 rounded-md shadow-sm hover:bg-gray-200">
-        <p class="text-gray-800">{{ order.winnerName }}</p>
-      </li>
-    </ul>
+    <!-- Close Button -->
     <div class="text-center mt-4">
-      <button class="close-btn px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600" (click)="closeOrdersPopup()">Close</button>
+      <button class="close-btn px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition"
+        (click)="closeOrdersPopup()">
+        Close
+      </button>
     </div>
   </div>
 </div>

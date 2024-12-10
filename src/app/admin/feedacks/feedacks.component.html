@@ -1,0 +1,28 @@
+<app-sidebar></app-sidebar>
+
+<div class="main-content">
+  <div class="container">
+    <div class="hero-section text-center">
+      <h1 class="title">Feedbacks</h1>
+      <p class="subtitle">See what our users have to say</p>
+    </div>
+
+    <div *ngIf="feedbacks.length > 0; else noFeedbacks" class="feedbacks-list">
+      <div class="feedback-card" *ngFor="let feedback of feedbacks">
+        <div class="card-body">
+          <h3 class="card-title">{{ feedback.name }}</h3>
+          <p><strong>Email:</strong> {{ feedback.email }}</p>
+          <p><strong>Rating:</strong> 
+            <span class="star-rating">{{ getStarRating(feedback.rating) }}</span>
+          </p>
+          <p><strong>Comments:</strong> {{ feedback.comments }}</p>
+          <p><small><em>Submitted on {{ feedback.createdAt | date }}</em></small></p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noFeedbacks>
+      <p>No feedbacks available.</p>
+    </ng-template>
+  </div>
+</div>

@@ -132,7 +132,7 @@ export class CompletedAuctions {
   
       console.log(`Sending notification to ${bid.bidderName}: ${message}`);
   
-      this.AuthorizationService.addNotificationToUser(bid.bidderName, message).subscribe({
+      this.AuthorizationService.addNotificationToUser(bid.bidderName, auction.name, message).subscribe({
         next: () => {
           console.log(`Notification sent to ${bid.bidderName}`);
         },
@@ -147,42 +147,42 @@ export class CompletedAuctions {
   }
   
 
-  submitOrder(bids: any[], auction:any): void {
-    const winnerName = this.getHighestBidder(bids); // Get the highest bidder's name
-    const auctionName = this.sendNotifications(auction); // Capture the auction name
-    console.log(auctionName);
-    if (winnerName === 'No bids') {
-      alert('No bids available to create an order.');
-      return;
-    }
+  // submitOrder(bids: any[], auction:any): void {
+  //   const winnerName = this.getHighestBidder(bids); // Get the highest bidder's name
+  //   const auctionName = this.sendNotifications(auction); // Capture the auction name
+  //   console.log(auctionName);
+  //   if (winnerName === 'No bids') {
+  //     alert('No bids available to create an order.');
+  //     return;
+  //   }
   
-    const orderData = {
-      winnerName: winnerName,
-      winningBid: Math.max(...bids.map(bid => bid.amount)), // Extract the highest bid amount
-      address: '', // Optional: send as an empty string
-      phone: '',
-      auctionName: auctionName, // Assign auction name to the order
-      status: 'Pending', // Optional: default can be set in the backend
-    };
+  //   const orderData = {
+  //     winnerName: winnerName,
+  //     winningBid: Math.max(...bids.map(bid => bid.amount)), // Extract the highest bid amount
+  //     address: '', // Optional: send as an empty string
+  //     phone: '',
+  //     auctionName: auctionName, // Assign auction name to the order
+  //     status: 'Pending', // Optional: default can be set in the backend
+  //   };
   
-    this.orderService.createOrder(orderData).subscribe({
-      next: (response) => {
-        console.log('Order created successfully:', response);
-        alert('Order created successfully!');
-      },
-      error: (error) => {
-        console.error('Error creating order:', error);
-        alert('Failed to create order. Please try again.');
-      }
-    });
-  }
+  //   this.orderService.createOrder(orderData).subscribe({
+  //     next: (response) => {
+  //       console.log('Order created successfully:', response);
+  //       alert('Order created successfully!');
+  //     },
+  //     error: (error) => {
+  //       console.error('Error creating order:', error);
+  //       alert('Failed to create order. Please try again.');
+  //     }
+  //   });
+  // }
   
   handleAuctionEnd(auction: any): void {
     // First, send notifications to all bidders
     this.sendNotifications(auction);
-  console.log("loru auction: ", auction)
-    // Then, submit the order for the highest bidder
-    this.submitOrder(auction.bids, auction);
+  // console.log("loru auction: ", auction)
+  //   // Then, submit the order for the highest bidder
+  //   // this.submitOrder(auction.bids, auction);
   }
   
 

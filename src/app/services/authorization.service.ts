@@ -60,7 +60,7 @@ export class AuthorizationService {
   }
 
   // Add a new notification to the user's notifications array
-  addNotificationToUser(firstName: string, newNotification: string): Observable<any> {
+  addNotificationToUser(firstName: string, auctionName:string ,newNotification: string): Observable<any> {
     const token = this.getToken();
     if (!token) {
         console.error('No token found. User is not logged in.');
@@ -68,7 +68,7 @@ export class AuthorizationService {
     }
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    const body = { firstName, message: newNotification }; // Corrected field name
+    const body = { firstName, auctionName ,message: newNotification }; // Corrected field name
     const apiUrl = 'http://localhost:3000/api/user/client-users/notifications/add'; // Direct API URL
 
     return this.http.post(apiUrl, body, { headers }).pipe(
@@ -180,9 +180,12 @@ export class AuthorizationService {
   //Notification Adding
 
   // Signup method
-  signup(email: string, password: string, firstName: string, lastName: string, notifications: any[]): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, { email, password, firstName, lastName, notifications });
+  signup(email: string, password: string, firstName: string, lastName: string, notifications: any[], winningBid: string): Observable<any> {
+    const body = { email, password, firstName, lastName, notifications, winningBid };
+    // console.log("Sending request to signup:", body); // Log the body to verify it's correct
+    return this.http.post(`http://localhost:3000/api/user/signup`, body);
   }
+  
 
   // Logout method
   logout() {

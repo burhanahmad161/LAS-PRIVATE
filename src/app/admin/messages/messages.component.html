@@ -1,0 +1,45 @@
+<app-sidebar />
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Contact Requests</h2>
+  
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center">
+      <p>Loading contact requests...</p>
+    </div>
+  
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Contact Requests Table -->
+    <div *ngIf="!loading && !errorMessage">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Action</th>  <!-- Added column for action -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of contactRequests">
+            <td>{{ request.name }}</td>
+            <td>{{ request.email }}</td>
+            <td>{{ request.message }}</td>
+            <td>{{ request.createdAt | date:'short' }}</td>
+            <td>
+              <!-- Button to mark as read -->
+              <button *ngIf="!request.isRead" (click)="markAsRead(request._id)" class="btn btn-info">
+                Mark as Read
+              </button>
+              <span *ngIf="request.isRead" class="text-success">Read</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -19,8 +19,14 @@ export class OrderService {
     return this.http.get<any[]>(`${this.apiUrl}/orders`);
   }
 
-  // Method to get orders for a specific user
-  getUserOrders(userId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/orders/${userId}`);
-  }
+// getUserOrders(winnerName: string): Observable<any[]> {
+//   // Ensure the URL is using template literals to pass the userName dynamically
+//   return this.http.get<any[]>(`http://localhost:3000/api/orders/${winnerName}`);
+// }
+
+getUserOrders(winnerName: string): Observable<any[]> {
+  // Ensure the URL is using template literals to pass the winnerName dynamically
+  return this.http.get<any[]>(`http://localhost:3000/api/orders/${winnerName}`);
+}
+
 }

@@ -1,11 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorizationService } from '../../services/authorization.service';
 import { UsersService } from '../../services/users.service';
 import { AuctionService } from '../../services/auction.service';
 import { OrderService } from '../../services/order.service';
+import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import 'bootstrap';
+import { ToastrService } from 'ngx-toastr';
+
+declare var bootstrap: any;
 
 declare var window: any; 
+
+interface Order {
+  auctionName: string;
+  winnerName: string;
+  // Add other properties here based on your API response
+  // e.g., orderId, price, status, etc.
+}
 
 @Component({
   selector: 'app-header',
@@ -13,20 +26,28 @@ declare var window: any;
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('orderModal') orderModal: any;
+  userx = { orders: [] };  // Store fetched orders
+
   user: any;
   menuVisible = false;
   isLoggedIn: boolean = false;
   userDetails: any;
   showMyBidsPopup: boolean = false;
   showNotificationsPopup : boolean = false;
-  showOrdersPopup: boolean = false;
+  // showOrdersPopup: boolean = false;
   userBids: Array<{ auctionName: string; bidAmount: number; bidTime:string }> = [];
   userId: string = '';  // Define userId
   notificationsVisible: boolean = false;
 
-  userx = {
-    orders: [] as any[],  // Array to store orders from the backend
+  order = {
+    phoneNumber: '',
+    address: ''
   };
+
+  showOrdersPopup = false; // Control visibility of the popup
+  orders: Order[] = []; // Define orders as an array of Order objects
 
   // Toggles the visibility of the notifications dropdown
   toggleNotifications(event: Event) {
@@ -39,6 +60,12 @@ export class HeaderComponent implements OnInit {
     const modal = new window.bootstrap.Modal(document.getElementById('profileModal'));
     modal.show();
   }
+  // openOrders(event: Event) {
+  //   event.preventDefault();
+  //   const modal = new window.bootstrap.Modal(document.getElementById('OrdersModal'));
+  //   modal.show()
+  // }
+  
 
   closeModal() {
     const modal = document.getElementById('profileModal');
@@ -50,22 +77,24 @@ export class HeaderComponent implements OnInit {
     public authService: AuthorizationService,
     private userService: UsersService,
     private auctionService: AuctionService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private http: HttpClient,
+    private modelService: NgbModal,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     const storedUser = localStorage.getItem('user');
-    console.log('Stored User:', storedUser);  // Log the raw stored user data
-    this.fetchOrders(this.userId);
+    // console.log('Stored User:', storedUser);  // Log the raw stored user data
 
     if (storedUser) {
       this.user = JSON.parse(storedUser);
-      console.log('Parsed User:', this.user);  // Log the parsed user object
+      // console.log('Parsed User:', this.user);  // Log the parsed user object
       // Check which property contains the user ID (_id or id or something else)
       this.userId = this.user?._id || this.user?.id;
-      console.log('User ID:', this.userId);  // Log the extracted user ID
+      // console.log('User ID:', this.userId);  // Log the extracted user ID
     } else {
-      console.error('No user data found in localStorage.');
+      // console.error('No user data found in localStorage.');
     }
   
     this.authService.isLoggedIn().subscribe(loggedIn => {
@@ -75,42 +104,25 @@ export class HeaderComponent implements OnInit {
         if (userData) {
           this.user = JSON.parse(userData);
           this.userId = this.user?._id || this.user?.id;
-          console.log('User ID after login check:', this.userId); // Log the userId after login check
+          // console.log('User ID after login check:', this.userId); // Log the userId after login check
         }
       } else if (!loggedIn) {
-        console.error('User is not logged in.');
+        // console.error('User is not logged in.');
       }
     });
   }
-  
-  fetchOrders(userId: string): void {
-    this.orderService.getUserOrders(userId).subscribe({
-      next: (orders) => {
-        this.user.orders = orders;
-      },
-      error: (err) => {
-        console.error('Error fetching orders', err);
-      },
-    });
-  }
+ 
+
 
   openMyBidsPopup(): void {
     if (this.userId) {
       this.showMyBidsPopup = true;
       this.fetchUserBids();
     } else {
-      console.error('User ID not found.');
+      // console.error('User ID not found.');
     }
   }
 
-  // openOrders(): void {
-  //   if (this.userId) {
-  //     this.showOrdersPopup = true;
-  //     // this.fetchUserBids();
-  //   } else {
-  //     console.error('User ID not found.');
-  //   }
-  // }
 
 
   openNotificationsPopup(): void {
@@ -118,7 +130,7 @@ export class HeaderComponent implements OnInit {
       this.showNotificationsPopup = true;
       // this.fetchUserBids();
     } else {
-      console.error('User ID not found.');
+      // console.error('User ID not found.');
     }
   }
   closeNotificationsPopup(): void {
@@ -128,42 +140,47 @@ export class HeaderComponent implements OnInit {
     this.showMyBidsPopup = false;
   }
 
-  closeOrderPopup(): void {
+  openOrdersPopup(): void {
+    if (this.userId) {
+      this.showOrdersPopup = true;
+      // this.fetchUserBids();
+    } else {
+      // console.error('User ID not found.');
+    }
+  }
+  closeOrdersPopup(): void {
     this.showOrdersPopup = false;
   }
+  
+  placeOrder() {
+    // Open the modal programmatically
+    const placeOrderModal = new bootstrap.Modal(document.getElementById('placeOrderModal'));
+    placeOrderModal.show();
+  }
 
-  // fetchUserBids(): void {
-  //   if (!this.userId) {
-  //     console.error('User ID not found.');
-  //     return;
-  //   }
-  
-  //   console.log('Fetching bids for User ID:', this.userId);  // Log userId before fetching bids
-  
-  //   this.auctionService.getUserBids(this.userId).subscribe((bids: any[]) => {
-  //     if (bids && bids.length > 0) {
-  //       console.log('Bids fetched successfully:', bids);  // Log the fetched bids
-  //       this.userBids = bids.map(bid => ({
-  //         userId: bid.userId,
-  //         auctionName: bid.auctionName,
-  //         amount: bid.amount,
-  //         bidTime: new Date(bid.bidTime).toLocaleString(),
-  //       }));
-  //     } else {
-  //       console.log('No bids found for this user.');
-  //     }
-  //   }, error => {
-  //     console.error('Error fetching bids:', error);
-  //   });
-  // }
-  
+  submitOrder() {
+    if (this.order.phoneNumber && this.order.address) {
+      // Proceed with placing the order (You can call an API here to save the order)
+      // console.log('Order placed:', this.order);
+
+      // Close the modal after submitting
+      const placeOrderModal = bootstrap.Modal.getInstance(document.getElementById('placeOrderModal'));
+      placeOrderModal.hide();
+
+      // Optionally, reset the form
+      this.order = { phoneNumber: '', address: '' };
+    } else {
+      alert('Please provide both phone number and address.');
+    }
+  }
+
   fetchUserBids(): void {
     if (!this.userId) {
       console.error('User ID not found. Ensure user is logged in and userId is set.');
       return;
     }
   
-    console.log('Fetching bids for User ID:', this.userId);
+    // console.log('Fetching bids for User ID:', this.userId);
   
     this.auctionService.getUserBids(this.userId).subscribe(
       (bids: any[]) => {
@@ -175,23 +192,14 @@ export class HeaderComponent implements OnInit {
             bidTime: new Date(bid.bidTime).toLocaleString(),
           }));
         } else {
-          console.log('No bids found for this user.');
+          this.toastr.info('No bids found for this user.', 'Bid First !');
+          // console.log('No bids found for this user.');
         }
       },
       error => {
         console.error('Error fetching bids:', error);
       }
     );
-  }
-  
-  openOrders(event: Event): void {
-    event.preventDefault();  // Prevent the default anchor tag behavior (page refresh)
-
-    this.showOrdersPopup = true;
-  }
-
-  closeOrdersPopup(): void {
-    this.showOrdersPopup = false;
   }
 
   onLogout() {

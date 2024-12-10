@@ -21,6 +21,12 @@ import { SellItemComponent } from './client/sell-item/sell-item.component';
 import { AuctionRequestsComponent } from './admin/auction-requests/auction-requests.component';
 import { AuctionsListComponent } from './admin/auctions-list/auctions-list.component';
 import { TestToastsComponent } from './client/test-toasts/test-toasts.component';
+import { OrderComponent } from './client/home/order/order.component';
+import { ConfirmOrderComponent } from './client/home/confirm-order/confirm-order.component';
+import { PaymentComponent } from './client/payment/payment.component';
+import { MessagesComponent } from './admin/messages/messages.component';
+import { FeedacksComponent } from './admin/feedacks/feedacks.component';
+import { AuthGuard } from './auth/admin.guard';
 // import { AdminGuard } from './auth/admin.guard';
 // import { ViewUsersComponent } from './view-users/view-users.component';
 // import { HomeComponent } from './client/home/home.component';
@@ -45,17 +51,21 @@ import { TestToastsComponent } from './client/test-toasts/test-toasts.component'
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'auctions', component: AuctionsComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'feedback', component: FeedbackComponent },
+  { path: 'auctions', component: AuctionsComponent, canActivate: [AuthGuard], },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard], },
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard], },
+  { path: 'faq', component: FaqComponent, canActivate: [AuthGuard], },
+  { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard], },
   { path: 'login', component: LoginComponent },
-  { path: 'bidding', component: BiddingComponent },
-  { path: 'bidding/:id', component: BiddingComponent },
-  { path: 'login-signup', component: MainLoginComponent},
-  { path: 'sell-item', component: SellItemComponent},
-  { path: 'test', component: TestToastsComponent},
+  { path: 'bidding', component: BiddingComponent, canActivate: [AuthGuard], },
+  { path: 'bidding/:id', component: BiddingComponent, canActivate: [AuthGuard], },
+  { path: 'login-signup', component: MainLoginComponent, canActivate: [AuthGuard], },
+  { path: 'sell-item', component: SellItemComponent, canActivate: [AuthGuard], },
+  { path: 'test', component: TestToastsComponent, canActivate: [AuthGuard], },
+  { path: 'order-details', component: OrderComponent, canActivate: [AuthGuard], },
+  { path: 'order-confirmation', component: ConfirmOrderComponent, canActivate: [AuthGuard], },
+  { path: 'pay', component: PaymentComponent, canActivate: [AuthGuard], },
+  
   
   
   //  ADMIN PANEL ROUTES
@@ -75,6 +85,8 @@ const routes: Routes = [
   { path: 'requests', component: AuctionRequestsComponent},
   { path: 'all-auctions', component: AuctionsListComponent},
   { path: 'completed-auctions', component: CompletedAuctions},
+  { path: 'messages', component: MessagesComponent},
+  { path: 'feedbacks', component: FeedacksComponent}
 
   // { path: 'dashboard', component: DashboardComponent },
   // { path: 'users', component: UsersComponent },

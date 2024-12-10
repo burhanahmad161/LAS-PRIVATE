@@ -75,8 +75,8 @@ export class LoginComponent {
       const firstName = form.value.firstName;
       const lastName = form.value.lastName;
       const notifications = ["Welcome to the platform!", "Your account has been created successfully."];
-
-      this.authService.signup(email, password, firstName, lastName, notifications).subscribe(
+      const winningBid = '';
+      this.authService.signup(email, password, firstName, lastName, notifications, winningBid).subscribe(
         response => {
           this.toastr.success('Signup successful', 'Success');
         },
@@ -84,7 +84,6 @@ export class LoginComponent {
           this.toastr.error('Signup failed. Please try again.', 'Error');
         }
       );
-      
     }
   }
 }

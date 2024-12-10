@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,25 +7,26 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-  contact = {
-    name: '',
-    email: '',
-    message: ''
-  };
+  name!: string;
+  email!: string;
+  message!: string;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  onSubmit(): void {
-    // Dummy function to simulate form submission
-    console.log('Form Submitted:', this.contact);
+  onSubmit() {
+    const contactData = {
+      name: this.name,
+      email: this.email,
+      message: this.message
+    };
 
-    // Clear form fields after submission
-    this.contact.name = '';
-    this.contact.email = '';
-    this.contact.message = '';
-
-    // Optionally, you can show a success message or redirect the user
-    alert('Thank you for contacting us! We will get back to you soon.');
+    this.http.post('http://localhost:3000/api/contact/contact-req', contactData)
+      .subscribe((response: any) => {
+        console.log('Contact form submitted successfully', response);
+        // Handle the response, such as showing a success message
+      }, (error: any) => {
+        console.error('Error submitting contact form', error);
+        // Handle the error, such as showing an error message
+      });
   }
-
 }

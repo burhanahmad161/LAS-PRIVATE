@@ -4,16 +4,23 @@
   <h2>Available Auctions</h2>
 
   <!-- Dropdown for Category Selection -->
-  <div class="category-selector">
-    <label for="categoryDropdown">Select Category:</label>
-    <select id="categoryDropdown" (change)="onCategoryChange($event)">
-      <option value="all">All Categories</option>
-      <option value="Electronics">Electronics</option>
-      <option value="Fashion">Fashion</option>
-      <option value="Home & Garden">Home & Garden</option>
-      <option value="Others">Others</option>
-    </select>
+  <div class="container mt-5">
+    <div class="card p-4 shadow-lg rounded-3 custom-card">
+      <div class="mb-4">
+        <label for="categoryDropdown" class="form-label fs-5 text-muted mb-2">Select Category</label>
+        <select id="categoryDropdown" (change)="onCategoryChange($event)"
+          class="form-select form-select-lg p-3 custom-select">
+          <option value="all">All Categories</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home & Garden">Home & Garden</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+    </div>
   </div>
+  
+  <br><br>
 
   <!-- Auctions List -->
   <div *ngIf="filteredAuctions.length > 0; else noAuctions" class="auction-container">
