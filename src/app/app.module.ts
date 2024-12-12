@@ -40,6 +40,7 @@ import { _StripeFactoryService } from '../app/services/stripe.service'; // Adjus
 import { NgxStripeModule } from 'ngx-stripe';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { FeedacksComponent } from './admin/feedacks/feedacks.component';
+import { PaymentsComponent } from './admin/payments/payments.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { FeedacksComponent } from './admin/feedacks/feedacks.component';
     CancelComponent,
     PaymentComponent,
     MessagesComponent,
-    FeedacksComponent
+    FeedacksComponent,
+    PaymentsComponent
   ],
   imports: [
     MatDialogModule,

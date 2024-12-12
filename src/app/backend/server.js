@@ -41,6 +41,8 @@ const ClientUser = require('./routes/clientUser.routes');
 const Orders = require('./routes/order.routes');
 const contactRoutes = require('./routes/contact.routes')
 const feedbackRoutes = require('./routes/feedback.routes')
+const paymentRoutes = require('./routes/payment.routes')
+const adminRoutes = require('./routes/admin.routes')
 const { default: Stripe } = require('stripe');
 const stripe = require('./routes/stripe.routes');
 const PORT = process.env.PORT || 3000;
@@ -54,6 +56,8 @@ app.use('/api/orders', Orders)
 app.use('/api/stripe', stripe);
 app.use('/api/contact', contactRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/payment', paymentRoutes)
+app.use('/api/admin', adminRoutes);
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/FYP', {

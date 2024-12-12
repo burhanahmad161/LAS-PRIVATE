@@ -1,10 +1,9 @@
-<app-header />
+<!-- <app-header />
 
 <div class="order-details-container p-4 bg-white rounded shadow-sm max-w-lg mx-auto">
   <h3 class="text-center text-primary mb-4">Place Order</h3>
 
-  <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
-    <!-- Phone Number Field -->
+  <form #orderForm="ngForm">
     <div class="mb-3">
       <label for="phone" class="form-label">Phone Number</label>
       <input
@@ -18,7 +17,6 @@
       />
     </div>
 
-    <!-- Address Field -->
     <div class="mb-3">
       <label for="address" class="form-label">Address</label>
       <textarea
@@ -31,12 +29,54 @@
       ></textarea>
     </div>
 
-    <!-- Submit Button -->
     <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" (click)="pay()" class="btn btn-primary">
         Submit Order
       </button>
     </div>
   </form>
 </div>
+<app-footer /> -->
+
+
+
+<app-header />
+
+<div class="order-details-container p-4 bg-white rounded shadow-sm max-w-lg mx-auto">
+  <h3 class="text-center text-primary mb-4">Place Order</h3>
+
+  <form #orderForm="ngForm">
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        class="form-control"
+        required
+        [(ngModel)]="order.phone"
+        placeholder="Enter your phone number"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        id="address"
+        name="address"
+        class="form-control"
+        required
+        [(ngModel)]="order.address"
+        placeholder="Enter your address"
+      ></textarea>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="button" (click)="pay()" class="btn btn-primary">
+        Pay Now
+      </button>
+    </div>
+  </form>
+</div>
+
 <app-footer />

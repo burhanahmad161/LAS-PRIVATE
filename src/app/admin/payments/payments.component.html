@@ -1,0 +1,36 @@
+<app-sidebar></app-sidebar>
+
+<!-- Main content area for payments -->
+<div class="main-content">
+  <!-- Error message display if there are any issues -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- Payment table if there are payments -->
+  <table *ngIf="payments.length > 0" class="payment-table">
+    <thead>
+      <tr>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments">
+        <td>{{ payment.phone }}</td>
+        <td>{{ payment.email }}</td>
+        <td>{{ payment.amount / 100 | currency }}</td>  <!-- Assuming amount is in cents -->
+        <td>{{ payment.description }}</td>
+        <td>{{ payment.status }}</td>
+        <td>{{ payment.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Message if no payments are found -->
+  <div *ngIf="payments.length === 0" class="no-payments-message">
+    No payments found.
+  </div>
+</div>

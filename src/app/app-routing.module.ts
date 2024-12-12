@@ -27,6 +27,7 @@ import { PaymentComponent } from './client/payment/payment.component';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { FeedacksComponent } from './admin/feedacks/feedacks.component';
 import { AuthGuard } from './auth/admin.guard';
+import { PaymentsComponent } from './admin/payments/payments.component';
 // import { AdminGuard } from './auth/admin.guard';
 // import { ViewUsersComponent } from './view-users/view-users.component';
 // import { HomeComponent } from './client/home/home.component';
@@ -51,21 +52,20 @@ import { AuthGuard } from './auth/admin.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'auctions', component: AuctionsComponent, canActivate: [AuthGuard], },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard], },
-  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard], },
-  { path: 'faq', component: FaqComponent, canActivate: [AuthGuard], },
-  { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard], },
+  { path: 'auctions', component: AuctionsComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'feedback', component: FeedbackComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'bidding', component: BiddingComponent, canActivate: [AuthGuard], },
-  { path: 'bidding/:id', component: BiddingComponent, canActivate: [AuthGuard], },
-  { path: 'login-signup', component: MainLoginComponent, canActivate: [AuthGuard], },
-  { path: 'sell-item', component: SellItemComponent, canActivate: [AuthGuard], },
-  { path: 'test', component: TestToastsComponent, canActivate: [AuthGuard], },
-  { path: 'order-details', component: OrderComponent, canActivate: [AuthGuard], },
-  { path: 'order-confirmation', component: ConfirmOrderComponent, canActivate: [AuthGuard], },
-  { path: 'pay', component: PaymentComponent, canActivate: [AuthGuard], },
-  
+  { path: 'bidding', component: BiddingComponent },
+  { path: 'bidding/:id', component: BiddingComponent },
+  { path: 'login-signup', component: MainLoginComponent },
+  { path: 'sell-item', component: SellItemComponent },
+  { path: 'test', component: TestToastsComponent },
+  { path: 'order-details', component: OrderComponent },
+  { path: 'order-confirmation', component: ConfirmOrderComponent },
+  { path:'payments', component: PaymentsComponent },  
   
   
   //  ADMIN PANEL ROUTES

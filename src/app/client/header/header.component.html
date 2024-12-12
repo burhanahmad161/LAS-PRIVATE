@@ -6,19 +6,40 @@
       <a routerLink="/home">Home</a>
       <a routerLink="/about">About</a>
       <a routerLink="/auctions">Auctions</a>
-      <!-- <a routerLink="/contact">Contact</a> -->
+      <a routerLink="/contact">Contact</a>
       <a routerLink="/sell-item">Auction Your Item</a>
     </nav>
 
     <div class="right-menu">
 
-      <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
+      <!-- <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)"><i class="fa-solid fa-user"></i>&nbsp;</a>
       <a (click)="openMyBidsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-gavel"
-          style="cursor: pointer;"></i>&nbsp;My Bids</a>
+          style="cursor: pointer;"></i>&nbsp;</a>
       <a (click)="openNotificationsPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-bell"
-          style="cursor: pointer;"></i>&nbsp;My Notifications</a>
-      <a (click)="openOrdersPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-bell"
-          style="cursor: pointer;"></i>&nbsp;My Orders</a>
+          style="cursor: pointer;"></i>&nbsp;</a>
+      <a (click)="openOrdersPopup()" *ngIf="isLoggedIn" style="cursor: pointer;"><i class="fa-solid fa-box"
+          style="cursor: pointer;"></i>&nbsp;</a> -->
+
+          <a href="#" *ngIf="isLoggedIn" (click)="openModal($event)" class="icon-link">
+            <i class="fa-solid fa-user"></i>&nbsp;
+            <span class="tooltip">User Profile</span>
+          </a>
+          
+          <a (click)="openMyBidsPopup()" *ngIf="isLoggedIn" class="icon-link">
+            <i class="fa-solid fa-gavel"></i>&nbsp;
+            <span class="tooltip">My Bids</span>
+          </a>
+          
+          <a (click)="openNotificationsPopup()" *ngIf="isLoggedIn" class="icon-link">
+            <i class="fa-solid fa-bell"></i>&nbsp;
+            <span class="tooltip">Notifications</span>
+          </a>
+          
+          <a (click)="openOrdersPopup()" *ngIf="isLoggedIn" class="icon-link">
+            <i class="fa-solid fa-box"></i>&nbsp;
+            <span class="tooltip">My Orders</span>
+          </a>
+          
 
       <div class="button-container m-2">
         <!-- <button class="btn btn-info">Login</button> -->
@@ -88,7 +109,7 @@
 </div>
 
 <!-- MODAL FOR DISPLAYING THE USER'S NOTIFICATIONS -->
-<div class="my-notifications-popup" *ngIf="showNotificationsPopup">
+<!-- <div class="my-notifications-popup" *ngIf="showNotificationsPopup">
   <div class="popup-content bg-gray-50 p-6 rounded-lg shadow-lg max-w-md mx-auto">
     <h3 class="text-center text-red-800 text-2xl font-semibold mb-4">My Notifications</h3>
     <ul class="space-y-3">
@@ -102,7 +123,23 @@
         (click)="closeNotificationsPopup()">Close</button>
     </div>
   </div>
+</div> -->
+
+<div class="my-notifications-popup" *ngIf="showNotificationsPopup">
+  <div class="popup-content bg-light p-4 rounded shadow-lg max-w-md mx-auto">
+    <h3 class="text-center text-danger mb-4">My Notifications</h3>
+    <ul class="notifications-list">
+      <li *ngFor="let notification of user.notifications" 
+          class="notification-item p-3 border border-light rounded hover-bg-light transition">
+        <p class="text-dark">{{ notification }}</p>
+      </li>
+    </ul>
+    <div class="text-center mt-4">
+      <button class="close-btn btn btn-danger px-5 py-2 rounded" (click)="closeNotificationsPopup()">Close</button>
+    </div>
+  </div>
 </div>
+
 
 <!-- MY ORDERS POPUP -->
 

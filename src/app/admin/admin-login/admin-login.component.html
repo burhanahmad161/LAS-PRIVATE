@@ -16,7 +16,7 @@
    -->
 
 
-   <!-- login.component.html -->
+   <!-- login.component.html
 <div class="login-wrapper">
     <div class="login-container">
       <h2>Login</h2>
@@ -34,4 +34,25 @@
       </form>
     </div>
   </div>
-  
+   -->
+
+
+   <!-- login.component.html -->
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="username" id="username" [(ngModel)]="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required />
+      </div>
+      <button type="submit" [disabled]="loading">Login</button>
+      <div *ngIf="loginError" class="error">Invalid credentials. Please try again.</div>
+      <div *ngIf="loading" class="loading">Loading...</div>
+    </form>
+  </div>
+</div>
